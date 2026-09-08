@@ -7,7 +7,7 @@ export function priceCheckSummary(reference: ReferencePrice) {
 
   const comparison = reference.premiumBps < 0
     ? `${unsignedPercent(reference.premiumBps / 100)} discount vs ${reference.underlying}`
-    : `${signedPercent(reference.premiumBps / 100)} vs ${reference.underlying}`;
+    : `${signedPercent(reference.premiumBps / 100)} premium vs ${reference.underlying}`;
   const priceAge = reference.ageSeconds === null
     ? "Stock price age unavailable"
     : `Stock price is ${ageDuration(reference.ageSeconds)} old`;

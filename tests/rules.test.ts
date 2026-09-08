@@ -193,14 +193,19 @@ describe("price-comparison presentation", () => {
   });
 
   it("keeps positive and zero comparisons labeled as premiums", () => {
-    expect(priceComparisonDetail({ ...reference, premiumBps: 5 }, "TSLAx")).toEqual({
+    const premium = { ...reference, premiumBps: 5 };
+    const even = { ...reference, premiumBps: 0 };
+
+    expect(priceComparisonDetail(premium, "TSLAx")).toEqual({
       label: "TSLAx premium vs. TSLA",
       value: "+0.05%",
     });
-    expect(priceComparisonDetail({ ...reference, premiumBps: 0 }, "TSLAx")).toEqual({
+    expect(priceCheckSummary(premium)[0]).toBe("+0.05% premium vs TSLA");
+    expect(priceComparisonDetail(even, "TSLAx")).toEqual({
       label: "TSLAx premium vs. TSLA",
       value: "0.00%",
     });
+    expect(priceCheckSummary(even)[0]).toBe("0.00% premium vs TSLA");
   });
 
   it("keeps the comparison unavailable when Finnhub has no price", () => {
